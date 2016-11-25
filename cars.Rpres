@@ -1,0 +1,45 @@
+Factors in Determining Fuel-Efficiency
+========================================================
+author: Alex Vollmer
+date: November 25, 2016
+autosize: true
+css: style.css
+
+The Problem Space
+========================================================
+
+Fuel efficiency is related to several factors:
+
+- Engine horsepower
+- Vehicle weight
+- Transmission type
+- Engine Displacement
+- and more…
+
+Vehicle Data
+========================================================
+
+The `mtcars` dataset provides us with some fairly rich
+data to explore:
+```{r out.width="800px", out.height="800px"}
+summary(mtcars)
+```
+
+Visualizing the Data
+========================================================
+```{r echo=FALSE}
+library(ggplot2)
+ggplot(mtcars, aes(x=mpg, y=wt, shape=as.factor(cyl), color=disp)) +
+  geom_point(size=3) +
+  ggtitle("Mileage vs. Weight, Cylinders & Displacement")
+```
+
+What's The Biggest Impact?
+========================================================
+```{r}
+fit <- lm(mpg ~ wt + cyl + disp + hp, data = mtcars)
+summary(fit)
+```
+
+From this regression we can see that vehicle weight (`wt`)
+has the biggest impact on fuel-efficiency.
