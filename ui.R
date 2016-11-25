@@ -8,6 +8,8 @@ shinyUI(fluidPage(
   # Sidebar with a slider input for number of bins
   sidebarLayout(
     sidebarPanel(
+      h3("Graph Configuration"),
+      p("Select a variable from the mtcars dataset for each aesthetic dimesion of the graph"),
       uiOutput("error"),
       uiOutput("warning"),
       uiOutput("xaxis"),
