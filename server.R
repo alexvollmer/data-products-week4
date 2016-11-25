@@ -57,6 +57,13 @@ shinyServer(function(input, output) {
     selectInput("size", "Select a size value", size_columns)
   })
 
+  column_labels <- c(mpg = "Miles Per Gallon", cyl = "Number of Cylinders",
+                     disp = "Displacement", hp = "Gross Horsepower",
+                     drat = "Rear Axle Ratio", wt = "Weight (1000 lbs)",
+                     qsec = "Quarter Mile Time", vs = "V/S",
+                     am = "Transmission", gear = "Number of Gears",
+                     carb = "Number of Carburetors")
+
   output$distPlot <- renderPlot({
     req(input$xaxis, input$yaxis, input$color, input$shape, input$size)
 
@@ -66,6 +73,11 @@ shinyServer(function(input, output) {
                          color=mtcars[[input$color]],
                          size=mtcars[[input$size]],
                          shape=as.factor(mtcars[[input$shape]]))) +
+        labs(x = column_labels[[input$xaxis]],
+             y = column_labels[[input$yaxis]],
+             color = column_labels[[input$color]],
+             size = column_labels[[input$size]],
+             shape = column_labels[[input$shape]]) +
         geom_point()
     }, error = function(e) {
       output$error <- renderText(e)
